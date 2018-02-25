@@ -1,0 +1,6 @@
+name: sql-server
+version: 0.0.2
+description: sql server instance 
+icon: https://wpengine.com/wp-content/uploads/2017/02/wpe_social.png
+sources:
+  - https://github.com/joecanto/docker-howto

@@ -1,0 +1,8 @@
+# pullPolicy defaults to IfNotPresent. The containers will only be pulled
+# if they don't already exist on the parent node.
+blog:
+   imageName: blog.mvc
+   imageTag: master-1
+   pullPolicy: Always
+
+ingress: LoadBalancer

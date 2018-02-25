@@ -1,0 +1,34 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: {{ .Release.Name | quote }}
+
+spec:
+  replicas: 1
+  revisionHistoryLimit: 4
+  template:
+    metadata:
+      labels:
+        app: {{ template "fullname" . }}
+    spec:
+      containers:
+      - name: blog-mvc
+        image: {{ template "blog_image" . }}
+        imagePullPolicy: {{ .Values.pullPolicy | quote }}
+        env:
+          - name: SQL_DB_HOST
+            value: sql-server
+          - name: SQL_DB_USER
+            value: "sa"
+          - name: SQL_DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: sql-server-pass
+                key: sa_password
+        ports:
+          - name: http
+            containerPort: 80

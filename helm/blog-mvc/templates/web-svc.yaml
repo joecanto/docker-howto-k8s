@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: {{ .Release.Name | quote }}
+
+spec:
+  type: {{ .Values.ingress }}
+  externalTrafficPolicy: Local
+  selector:
+    app: {{ template "fullname" . }}
+  ports:
+    - name: http
+      port: 80
