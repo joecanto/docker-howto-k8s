@@ -1,0 +1,5 @@
+# requirements.yaml
+dependencies:
+- name: sql-server
+  version: "0.0.2"
+  repository: "file://../sql-server"
