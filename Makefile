@@ -1,13 +1,15 @@
 IMAGE_TAG     ?= latest
+GCR 			  ?= eu.gcr.io/development-186617
 K8S_NAMESPACE ?= $(shell echo $(USER) | sed 's/[.]/-/g')
 
 .PHONY: blog-mvc-image
 blog-mvc-image:
 	@docker build -t blog.mvc:$(IMAGE_TAG) -f blog.mvc/Dockerfile .
 
+.PHONY: blog-mvc-push
 blog-mvc-push:
-	@docker tag blog.mvc:$(IMAGE_TAG) eu.gcr.io/development-186617/blog.mvc:$(IMAGE_TAG)
-	@gcloud docker -- push eu.gcr.io/development-186617/blog.mvc:$(IMAGE_TAG)
+	@docker tag blog.mvc:$(IMAGE_TAG) $(GCR)/blog.mvc:$(IMAGE_TAG)
+	@gcloud docker -- push $(GCR)/blog.mvc:$(IMAGE_TAG)
 
 .PHONY: deploy-blog-prod
 deploy-blog-prod:
