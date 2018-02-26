@@ -282,3 +282,4 @@ __pycache__/
 *.jmconfig
 
 secrets/
+.vscode/
