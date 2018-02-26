@@ -1,5 +1,5 @@
 IMAGE_TAG     ?= latest
-GCR 			  ?= eu.gcr.io/development-186617
+GCR 	      ?= eu.gcr.io/development-186617
 K8S_NAMESPACE ?= $(shell echo $(USER) | sed 's/[.]/-/g')
 
 .PHONY: blog-mvc-image
