@@ -15,7 +15,7 @@ blog-mvc-push:
 deploy-blog-prod:
 	@helm upgrade blog-ui ./helm/blog-mvc \
 		--install \
-		--namespace $(K8S_NAMESPACE)
+		--namespace $(K8S_NAMESPACE) \
 		--set blog.imageTag=$(IMAGE_TAG)
 
 .PHONY: deploy-sql-server
@@ -24,3 +24,6 @@ deploy-sql-server:
 		--install \
 		--namespace $(K8S_NAMESPACE) \
 		--set secrets.sa_sql_server="$(shell cat secrets/sql-server.txt)"
+
+.PHONY: build-deploy-all
+build-deploy-all: deploy-sql-server blog-mvc-image blog-mvc-push deploy-blog-prod
